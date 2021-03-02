@@ -18,6 +18,6 @@ curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 > get
 chmod 700 get_helm.sh
 ./get_helm.sh
 
-# Install Aquactl
-curl --output aquactl https://get.aquasec.com/aquactl/mac/stable/aquactl 
+# Install Aquactl for linux
+curl --output aquactl https://get.aquasec.com/aquactl/stable/aquactl 
 chmod +x aquactl
