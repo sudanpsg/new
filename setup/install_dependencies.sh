@@ -21,3 +21,4 @@ chmod 700 get_helm.sh
 # Install Aquactl for linux
 curl --output aquactl https://get.aquasec.com/aquactl/stable/aquactl 
 chmod +x aquactl
+./aquactl version
