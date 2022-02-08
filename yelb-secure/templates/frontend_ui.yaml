@@ -15,41 +15,9 @@ spec:
         app: yelb-ui
         tier: frontend
     spec:
-      initContainers:
-      - image: curlimages/curl:latest
-        imagePullPolicy: Always
-        name: sidecar
-        env:
-        - name: version
-          value: 5.0.20261
-        - name: username
-          valueFrom:
-            secretKeyRef:
-              name: aqua
-              key: username
-        - name: password
-          valueFrom:
-            secretKeyRef:
-              name: aqua
-              key: password
-        command: ["/bin/sh", "-c" ,"curl --user $(username):$(password) https://download.aquasec.com/micro-enforcer/$(version)/microenforcer > /test/microenforcer && chmod +x /test/microenforcer" ]
-        volumeMounts:
-        - name: sidecar
-          mountPath: /test
       containers:
         - name: yelb-ui
           image: mreferre/yelb-ui:0.6
-          env:
-          - name: AQUA_SERVER
-            value: "{{ .Values.env }}"
-          - name: AQUA_TOKEN
-            value: fargate
           ports:
             - containerPort: 80
-          command: ["/test/microenforcer", "./startup.sh"]
-          volumeMounts:
-            - mountPath: /test
-              name: sidecar
-      volumes:
-      - name: sidecar
-        emptyDir: {}
+          command: ["./startup.sh"]
